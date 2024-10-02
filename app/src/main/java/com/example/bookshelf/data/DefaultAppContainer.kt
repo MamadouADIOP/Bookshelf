@@ -7,13 +7,12 @@ import retrofit2.Retrofit
 
 class DefaultAppContainer : AppContainer {
     private val baseUrl: String = "https://www.googleapis.com/books/v1/"
-
+    private val jsonConfig:Json =  Json {
+        isLenient = true
+        ignoreUnknownKeys = true
+    }
     private val retrofit: Retrofit = Retrofit.Builder()
-        .addConverterFactory(
-            Json {
-            isLenient = true
-            ignoreUnknownKeys = true
-        }.asConverterFactory("application/json".toMediaType()))
+        .addConverterFactory(jsonConfig.asConverterFactory("application/json".toMediaType()))
         .baseUrl(baseUrl).build()
 
     private val retrofitService: BookshelfService by lazy {

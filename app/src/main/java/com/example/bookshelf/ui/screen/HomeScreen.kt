@@ -1,7 +1,9 @@
 package com.example.bookshelf.ui.screen
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
@@ -13,6 +15,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -55,24 +58,29 @@ fun BookshelfGridScreen(
         contentPadding = contentPadding
     ) {
         items(items = books, key = { book -> book.id }) { book ->
-            BookCard(book, modifier = modifier.padding(12.dp))
+            BookCard(book, Modifier.padding(2.dp))
         }
     }
 }
 
 @Composable
-fun BookCard(book: Item, modifier: Modifier) {
-    Card(modifier = modifier) {
-        AsyncImage(
-            model = ImageRequest.Builder(context = LocalContext.current)
-                .data(book.volumeInfo.imageLinks?.thumbnail?.replace("http", "https")).build(), error = painterResource(
-                id = R.drawable.ic_broken_image
-            ),
-            placeholder = painterResource(id = R.drawable.loading_img),
-            contentDescription = stringResource(id = R.string.amphibian_desc),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxSize()
-        )
+fun BookCard(book: Item, modifier: Modifier = Modifier) {
+    Column(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+            AsyncImage(
+                model = ImageRequest.Builder(context = LocalContext.current)
+                    .data(book.volumeInfo.imageLinks?.thumbnail?.replace("http", "https")).build(),
+                error = painterResource(
+                    id = R.drawable.ic_broken_image
+                ),
+                placeholder = painterResource(id = R.drawable.loading_img),
+                contentDescription = stringResource(id = R.string.amphibian_desc),
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(4.dp)
+                    .aspectRatio(0.75f)
+            )
+
     }
 }
 
