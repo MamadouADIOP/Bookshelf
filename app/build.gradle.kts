@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.android)
     implementation(libs.coil.compose)
     testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test.jvm)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
