@@ -57,7 +57,7 @@ fun BookshelfTopAppBar(modifier: Modifier = Modifier) {
                 text = stringResource(R.string.app_name),
                 style = MaterialTheme.typography.headlineLarge,
                 color = MaterialTheme.colorScheme.background,
-                modifier = Modifier.padding(top = 32.dp)
+                modifier = Modifier.padding(top = 16.dp)
             )
         },
         colors = TopAppBarDefaults.centerAlignedTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary),

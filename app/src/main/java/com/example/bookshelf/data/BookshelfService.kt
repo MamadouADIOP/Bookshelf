@@ -6,6 +6,6 @@ import retrofit2.http.Query
 
 interface BookshelfService{
     @GET("volumes")
-    suspend fun getBoooks(@Query("q") searchTerm:String, @Query("maxResults") maxResult:Int = 40) : Bookshelf
+    suspend fun getBoooks(@Query("q") searchTerm:String, @Query("startIndex") startIndex:Int  = 0, @Query("maxResults") maxResult:Int) : Bookshelf
 }
 

@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.bookshelf.R
+import com.example.bookshelf.model.Book
 import com.example.bookshelf.model.Item
 import com.example.bookshelf.ui.theme.BookshelfTheme
 
@@ -48,7 +49,7 @@ fun HomeScreen(
 
 @Composable
 fun BookshelfGridScreen(
-    books: List<Item>,
+    books: List<Book>,
     modifier: Modifier = Modifier,
     contentPadding: PaddingValues = PaddingValues(0.dp)
 ) {
@@ -64,11 +65,11 @@ fun BookshelfGridScreen(
 }
 
 @Composable
-fun BookCard(book: Item, modifier: Modifier = Modifier) {
+fun BookCard(book: Book, modifier: Modifier = Modifier) {
     Column(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
             AsyncImage(
                 model = ImageRequest.Builder(context = LocalContext.current)
-                    .data(book.volumeInfo.imageLinks?.thumbnail?.replace("http", "https")).build(),
+                    .data(book.link.replace("http", "https")).build(),
                 error = painterResource(
                     id = R.drawable.ic_broken_image
                 ),
