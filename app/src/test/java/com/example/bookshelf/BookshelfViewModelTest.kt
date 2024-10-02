@@ -26,15 +26,18 @@ import org.junit.Rule
 class BookshelfViewModelTest {
     @get:Rule
     val testDispatcher = TestDispatcherRule()
-    val myScope = GlobalScope
-    @Test
-    fun marsViewModel_getMarsPhotos_verifyMarsUiStateSuccess(): Unit = runBlocking{
-        myScope.launch {
-        val bookshelfViewModel = BookshelfViewModel(bookshelfRepository = FakeNetworkBookshelfRepository() )
 
-        assertEquals(
-            BookshelfUiState.Success(FakeDataSource.books),
-            bookshelfViewModel.bookshelfUiState
-        )
-    }}
+    @Test
+    fun marsViewModel_getMarsPhotos_verifyMarsUiStateSuccess(): Unit = runTest {
+
+        GlobalScope.launch {
+            val bookshelfViewModel =
+                BookshelfViewModel(bookshelfRepository = FakeNetworkBookshelfRepository())
+
+            assertEquals(
+                BookshelfUiState.Success(FakeDataSource.books), bookshelfViewModel.bookshelfUiState
+            )
+        }.join()
+        advanceUntilIdle()
+    }
 }

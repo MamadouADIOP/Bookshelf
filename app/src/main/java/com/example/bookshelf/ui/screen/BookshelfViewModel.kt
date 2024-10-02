@@ -61,7 +61,6 @@ class BookshelfViewModel(private val bookshelfRepository: BookshelfRepository) :
     }
 
     private suspend fun getBookWithId(searchTerm: String, i: Int) : List<Book?>{
-        Log.d("index: $i", "")
         try {
             return bookshelfRepository.getBooks(
                 searchTerm = searchTerm,
